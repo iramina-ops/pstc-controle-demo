@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,9 +8,9 @@
   /* Paleta de referência do skill dataviz (categórica slots 1–3, validada) */
   :root{
     color-scheme: light;
-    --page:#f9f9f7; --surface-1:#fcfcfb; --text-primary:#0b0b0b; --text-secondary:#52514e; --muted:#898781;
-    --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
-    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+    --page:#000040; --surface-1:#0a0a55; --text-primary:#ffffff; --text-secondary:#c9cfe8; --muted:#9aa3d6;
+    --grid:#1d1d6b; --axis:#3a3a8a; --border:rgba(255,255,255,.14);
+    --s1:#8fb0ff; --s2:#f0d000; --s3:#ffffff; --brand:#ffffff; --accent:#f0d000;
     --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
     --good-text:#006300;
   }
@@ -19,7 +19,7 @@
       color-scheme: dark;
       --page:#0d0d0d; --surface-1:#1a1a19; --text-primary:#f0efec; --text-secondary:#c3c2b7; --muted:#898781;
       --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
-      --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+      --s1:#6b8ce8; --s2:#a88500; --s3:#8fa8f0; --brand:#8fa8f0; --accent:#f0d000;
       --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#e66767;
       --good-text:#0ca30c;
     }
@@ -28,16 +28,18 @@
     color-scheme: dark;
     --page:#0d0d0d; --surface-1:#1a1a19; --text-primary:#f0efec; --text-secondary:#c3c2b7; --muted:#898781;
     --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
-    --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+    --s1:#6b8ce8; --s2:#a88500; --s3:#8fa8f0; --brand:#8fa8f0; --accent:#f0d000;
     --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#e66767;
     --good-text:#0ca30c;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--page);color:var(--text-primary);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
-  nav{position:sticky;top:0;z-index:5;background:var(--surface-1);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-  nav .brand{font-weight:700;margin-right:10px}
-  nav button{font:inherit;color:var(--text-secondary);background:transparent;border:1px solid transparent;border-radius:8px;padding:6px 10px;cursor:pointer}
-  nav button[aria-selected="true"]{color:var(--text-primary);border-color:var(--border);background:var(--page)}
+  nav{position:sticky;top:0;z-index:5;background:#000033;border-bottom:3px solid #f0d000;position:sticky;overflow:hidden;padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  nav .brand{font-weight:700;margin-right:10px;color:#ffffff;display:flex;align-items:center;gap:8px}
+  nav .logo{height:30px;width:auto;display:block}
+  nav > *{position:relative;z-index:1}
+  nav button{font:inherit;color:#e8ebf7;background:transparent;border:1px solid transparent;border-radius:8px;padding:6px 10px;cursor:pointer}
+  nav button[aria-selected="true"]{color:#ffffff;border-color:transparent;background:rgba(255,255,255,.12);box-shadow:inset 0 -3px 0 #f0d000}
   nav button:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
   .aviso{margin:12px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface-1);color:var(--text-secondary);font-size:13px}
   .page{display:none;max-width:1200px;margin:0 auto;padding:12px 12px 28px}
@@ -51,6 +53,7 @@
   .kpi .l{color:var(--text-secondary);font-size:12px}
   .kpi .d{font-size:12px;color:var(--muted);margin-top:2px}
   .grid{display:grid;grid-template-columns:1fr;gap:10px}
+  .grid>*{min-width:0}
   @media (min-width:860px){.grid.two{grid-template-columns:1fr 1fr}}
   .card h2{font-size:13px;margin:0 0 8px;color:var(--text-secondary);font-weight:600}
   .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--text-secondary);margin-bottom:6px}
@@ -61,7 +64,7 @@
   .hrow .val{color:var(--text-primary);font-variant-numeric:tabular-nums;text-align:right}
   .hrow .lab{color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   svg{width:100%;height:auto;display:block;overflow:visible}
-  svg text{fill:var(--text-secondary);font-size:11px;font-family:inherit}
+  svg text{fill:#c9cfe8;font-size:11px;font-family:inherit}
   svg .tick{fill:var(--muted)}
   table{width:100%;border-collapse:collapse;font-size:13px}
   th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--grid);white-space:nowrap}
@@ -87,6 +90,10 @@
   .subnav button{font:inherit;font-size:13px;color:var(--text-secondary);background:transparent;border:1px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer}
   .subnav button[aria-pressed="true"]{color:var(--text-primary);background:var(--surface-1)}
   .subnav button:focus-visible{outline:2px solid var(--s1);outline-offset:2px}
+  .sel-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:0 0 10px;font-size:13px;color:var(--text-secondary)}
+  .sel-row select{font:inherit;color:var(--text-primary);background:var(--surface-1);border:1px solid var(--border);border-radius:8px;padding:5px 8px;margin-left:6px}
+  .wrap a.ref{color:var(--s1);font-size:12px}
+  details.det summary{cursor:pointer;color:var(--text-secondary);font-size:13px;margin:0 0 8px}
   @media print{
     nav,.aviso,.tabs-hint,#home{display:none!important}
     body{background:#fff;color:#000}
@@ -113,8 +120,7 @@
 <div class="aviso">Painel em formato de exemplo: os números são fictícios. Substitua o objeto <code>DATA</code> no fim da página pelos dados reais de cada pilar.</div>
 
 <!-- ============ INÍCIO ============ -->
-<section class="page active" id="home" role="tabpanel">
-  <div class="head"><div><div class="kick">Clube formador · PSTC</div><h1>Controle por pilar</h1></div></div>
+<section class="page active" id="home" role="tabpanel">  <div class="head"><div><div class="kick">Clube formador · PSTC</div><h1>Controle por pilar</h1></div></div>
   <p class="sample" style="font-size:13px">Clique em um pilar para abrir o detalhe.</p>
   <div class="home-grid" data-home></div>
 </section>
@@ -135,6 +141,7 @@
 <!-- ============ PILAR 2 ============ -->
 <section class="page" id="p2" role="tabpanel">
   <div class="head"><div><div class="kick">Pilar 02</div><h1>Financeira, risco e break-even</h1></div><div class="kick" data-period></div></div>
+  <div class="subnav"><button type="button" data-p="p2" aria-pressed="true">Visão geral</button><button type="button" data-p="p2s" aria-pressed="false">Safras</button></div>
   <div class="kpis" data-kpis></div>
   <div class="grid two">
     <div class="card"><h2>Custo e receita por mês</h2><div data-line="fin"></div></div>
@@ -142,6 +149,31 @@
   </div>
   <div class="grid" style="margin-top:10px">
     <div class="card"><h2>Custo por safra (categoria × ano de entrada)</h2><div class="wrap" data-table="safras"></div></div>
+  </div>
+</section>
+
+<!-- ============ PILAR 2 · SUBPÁGINA SAFRAS ============ -->
+<section class="page" id="p2s" role="tabpanel">
+  <div class="subnav"><button type="button" data-p="p2" aria-pressed="false">Visão geral</button><button type="button" data-p="p2s" aria-pressed="true">Safras</button></div>
+  <div class="head"><div><div class="kick">Pilar 02 · Safras</div><h1>Destino, tempo e custo por safra</h1></div><div class="kick" data-period></div></div>
+  <p class="pdesc-page">Safra é o grupo de atletas da mesma categoria e do mesmo ano de entrada. Mostra o destino de cada atleta, quanto tempo ficou no clube e quanto custou formar quem chegou ao profissional.</p>
+  <div class="sel-row">
+    <label>Categoria<select data-sel="cat"></select></label>
+    <label>Ano de entrada<select data-sel="ano"></select></label>
+  </div>
+  <div class="kpis" data-kpis></div>
+  <div class="grid two">
+    <div class="card"><h2>Destino da safra (atletas)</h2><div data-hbar="destino"></div></div>
+    <div class="card"><h2>Onde estão hoje (país, com registro)</h2><div data-hbar="paises"></div></div>
+  </div>
+  <div class="grid" style="margin-top:10px">
+    <div class="card"><h2>Tempo no PSTC e custo, por destino</h2><div class="wrap" data-safra-dest></div><div class="sample">Sem registro = não encontramos informação sobre o atleta. Não quer dizer que ele saiu do futebol.</div></div>
+  </div>
+  <div class="grid" style="margin-top:10px">
+    <div class="card"><h2>Comparativo entre safras da categoria</h2><div class="wrap" data-safra-cmp></div></div>
+  </div>
+  <div class="grid" style="margin-top:10px">
+    <div class="card"><h2>Atletas da safra · histórico e referências</h2><div data-safra-tab></div><div class="sample">Os links vêm da aba Historico do gabarito. Enquanto estiverem vazios, aparece "cole o link".</div></div>
   </div>
 </section>
 
@@ -217,7 +249,7 @@
   </div>
 </section>
 
-<p class="sample" style="padding:0 16px">Fonte dos dados: amostra interna. Cores: paleta de referência do skill dataviz; cada série e cada status também têm rótulo ou ícone.</p>
+<p class="sample" style="padding:0 16px">Fonte dos dados: amostra interna. Cores extraídas do logo do PSTC (azul-marinho e dourado); cada série e cada status também têm rótulo ou ícone.</p>
 
 <script>
 /* ====================== DADOS (substituir pelos reais) ====================== */
@@ -512,9 +544,115 @@ function renderPage(pid){
   });
 }
 
+/* ====================== SAFRAS (Pilar 02 · subpágina) ====================== */
+/* Um registro por atleta, no formato da aba Historico do gabarito. Valores em R$.
+   Dados fictícios: cada safra tem 100 atletas, distribuídos conforme SAFRA_SPECS. */
+const SAFRA_CATS = ["Sub-15","Sub-17","Sub-20"];
+const DESTINOS = ["prof","sem","ativo","disp","amad"];
+const SIT = {
+  prof:{label:"Profissional",  icon:"✓", color:"var(--good)"},
+  ativo:{label:"Em formação",  icon:"●", color:"var(--s1)"},
+  sem:{label:"Sem registro",   icon:"▲", color:"var(--warning)"},
+  disp:{label:"Dispensado",    icon:"✖", color:"var(--critical)"},
+  amad:{label:"Clube amador",  icon:"◆", color:"var(--muted)"}
+};
+/* vendas: receita de cada atleta vendido (também conta como profissional) */
+const SAFRA_SPECS = [
+  {cat:"Sub-15", ano:2020, custo:30000, vendas:[90000],                 prof:8,  sem:35, ativo:30, disp:16, amad:10},
+  {cat:"Sub-17", ano:2019, custo:55000, vendas:[400000,250000,120000],  prof:15, sem:40, ativo:12, disp:20, amad:10},
+  {cat:"Sub-17", ano:2020, custo:60000, vendas:[240000,80000],         prof:18, sem:50, ativo:10, disp:12, amad:8},
+  {cat:"Sub-17", ano:2021, custo:58000, vendas:[150000],               prof:12, sem:45, ativo:15, disp:17, amad:10},
+  {cat:"Sub-17", ano:2022, custo:62000, vendas:[],                     prof:5,  sem:30, ativo:40, disp:15, amad:10},
+  {cat:"Sub-20", ano:2018, custo:65000, vendas:[150000,300000],        prof:25, sem:30, ativo:5,  disp:25, amad:13}
+];
+function buildSafra(spec){
+  const out = []; let i = 0;
+  const push = (sit, saida, pais, dias, receita = 0) => {
+    i++;
+    const f = 0.9 + 0.2*(((i*37)%100)/100);           /* custo individual ±10%, determinístico */
+    out.push({cat:spec.cat, ano:spec.ano, cod:`S${spec.cat.slice(4)}-${spec.ano}-${String(i).padStart(3,"0")}`,
+      sit, pais, saida, custo:Math.round(spec.custo*f), receita, dias: dias + (i*53)%300, tm:"", fifa:"", cbf:""});
+  };
+  spec.vendas.forEach((r,k) => push("prof","Venda", ["Portugal","EUA","Brasil"][k%3], 1700, r));
+  for (let k=0;k<spec.prof;k++)  push("prof","Outro clube (sem venda)", k%3===2 ? "Portugal" : "Brasil", 1500);
+  for (let k=0;k<spec.sem;k++)   push("sem","Sem registro","—", 600);
+  for (let k=0;k<spec.ativo;k++) push("ativo","Permanece no clube","Brasil", 1100);
+  for (let k=0;k<spec.disp;k++)  push("disp","Dispensa","Brasil", 500);
+  for (let k=0;k<spec.amad;k++)  push("amad","Outro clube (amador)","Brasil", 800);
+  return out;
+}
+const SAFRAS = SAFRA_SPECS.flatMap(buildSafra);
+const SEL = {cat:"Sub-17", ano:2020};
+
+const brl = v => "R$ " + Math.round(v/1000).toLocaleString("pt-BR") + " mil";
+const pctFmt = v => Math.round(v*100).toLocaleString("pt-BR").replace("-", "−") + "%";
+const anosFmt = dias => (dias/365).toLocaleString("pt-BR",{maximumFractionDigits:1}) + " anos";
+const yearsOf = cat => [...new Set(SAFRAS.filter(r=>r.cat===cat).map(r=>r.ano))].sort((a,b)=>a-b);
+const sumOf = (rows, f) => rows.reduce((s,r)=>s+f(r),0);
+function aggSafra(rows){
+  const n = rows.length, custo = sumOf(rows,r=>r.custo), receita = sumOf(rows,r=>r.receita);
+  const prof = rows.filter(r=>r.sit==="prof").length;
+  return {n, custo, receita, prof,
+    roi: custo ? (receita-custo)/custo : 0,
+    custoMedio: n ? custo/n : 0,
+    custoProf: prof ? custo/prof : 0,
+    dias: n ? sumOf(rows,r=>r.dias)/n : 0};
+}
+
+function renderSafras(){
+  const page = document.getElementById("p2s");
+  const selCat = page.querySelector('[data-sel="cat"]'), selAno = page.querySelector('[data-sel="ano"]');
+  selCat.innerHTML = SAFRA_CATS.map(c=>`<option ${c===SEL.cat?"selected":""}>${c}</option>`).join("");
+  const years = yearsOf(SEL.cat);
+  if (!years.includes(SEL.ano)) SEL.ano = years[years.length-1];
+  selAno.innerHTML = years.map(y=>`<option value="${y}" ${y===SEL.ano?"selected":""}>${y}</option>`).join("");
+  page.querySelector("[data-period]").textContent = `Exemplo · safras ${years[0]} a ${years[years.length-1]} · 100 atletas por safra`;
+
+  const rows = SAFRAS.filter(r=>r.cat===SEL.cat && r.ano===SEL.ano);
+  const a = aggSafra(rows);
+  renderKpis(page.querySelector("[data-kpis]"), [
+    {l:"Atletas da safra", v:a.n, d:`entraram em ${SEL.ano}`},
+    {l:"Custo médio por atleta", v:brl(a.custoMedio), d:`custo total ${brl(a.custo)}`},
+    {l:"Profissionalizados", v:a.prof, d:`${pctFmt(a.prof/a.n)} da safra`},
+    {l:"Custo por profissionalizado", v:brl(a.custoProf), d:"custo da safra ÷ profissionais"},
+    {l:"Tempo médio no PSTC", v:anosFmt(a.dias), d:"todos os atletas da safra"},
+    {l:"ROI da safra", v:pctFmt(a.roi), d:`receita ${brl(a.receita)}`, st:a.roi<0?"critical":"good", stl:a.roi<0?"Abaixo do custo":"Acima do custo"}
+  ]);
+
+  renderHbar(page.querySelector('[data-hbar="destino"]'), DESTINOS.map(k=>[SIT[k].label, rows.filter(r=>r.sit===k).length]));
+  const paises = {};
+  rows.filter(r=>r.sit!=="sem").forEach(r=>{ paises[r.pais]=(paises[r.pais]||0)+1; });
+  renderHbar(page.querySelector('[data-hbar="paises"]'), Object.entries(paises).sort((x,y)=>y[1]-x[1]));
+
+  const dest = DESTINOS.map(k=>{
+    const g = rows.filter(r=>r.sit===k), ag = aggSafra(g);
+    return [SIT[k].label, String(g.length), pctFmt(g.length/a.n), g.length ? anosFmt(ag.dias) : "—", g.length ? brl(ag.custoMedio) : "—"];
+  });
+  dest.push(["Total", String(a.n), "100%", anosFmt(a.dias), brl(a.custoMedio)]);
+  renderTable(page.querySelector("[data-safra-dest]"), {head:["Destino","Atletas","% da safra","Tempo médio no PSTC","Custo médio por atleta"], rows:dest, numCols:[1,2,3,4]});
+
+  const cmp = years.map(y=>{
+    const g = SAFRAS.filter(r=>r.cat===SEL.cat && r.ano===y), ag = aggSafra(g);
+    return [`${y}${y===SEL.ano?" · selecionada":""}`, String(ag.n), String(ag.prof), String(g.filter(r=>r.sit==="sem").length),
+            String(Math.round(ag.custoMedio/1000)), String(Math.round(ag.custoProf/1000)), pctFmt(ag.roi)];
+  });
+  renderTable(page.querySelector("[data-safra-cmp]"), {head:["Safra","Atletas","Profissionais","Sem registro","Custo médio (R$ mil)","Custo por profissional (R$ mil)","ROI"], rows:cmp, numCols:[1,2,3,4,5,6]});
+
+  const heads = ["Código","Situação atual","País","Tipo de saída","Dias no PSTC","Custo (R$ mil)","Receita (R$ mil)","ROI","Transfermarkt","FIFA","CBF"];
+  const numIdx = [4,5,6,7];
+  const body = rows.map(r=>{
+    const s = SIT[r.sit], roi = (r.receita-r.custo)/r.custo;
+    const refs = [r.tm,r.fifa,r.cbf].map(l => `<td>${l ? `<a class="ref" href="${esc(l)}" target="_blank" rel="noopener">abrir</a>` : `<span class="sample">cole o link</span>`}</td>`).join("");
+    return `<tr><td>${esc(r.cod)}</td><td><span class="st"><span aria-hidden="true" style="color:${s.color}">${s.icon}</span>${esc(s.label)}</span></td><td>${esc(r.pais)}</td><td>${esc(r.saida)}</td><td class="n">${r.dias.toLocaleString("pt-BR")}</td><td class="n">${Math.round(r.custo/1000).toLocaleString("pt-BR")}</td><td class="n">${Math.round(r.receita/1000).toLocaleString("pt-BR")}</td><td class="n">${pctFmt(roi)}</td>${refs}</tr>`;
+  }).join("");
+  page.querySelector("[data-safra-tab]").innerHTML = `<details class="det"><summary>Ver os ${rows.length} atletas da safra</summary><div class="wrap"><table><thead><tr>${heads.map((h,i)=>`<th class="${numIdx.includes(i)?"n":""}">${h}</th>`).join("")}</tr></thead><tbody>${body}</tbody></table></div></details>`;
+}
+document.querySelector('[data-sel="cat"]').addEventListener("change", e => { SEL.cat = e.target.value; renderSafras(); });
+document.querySelector('[data-sel="ano"]').addEventListener("change", e => { SEL.ano = Number(e.target.value); renderSafras(); });
+
 /* ====================== NAVEGAÇÃO ====================== */
 const tabs = [...document.querySelectorAll('nav [role="tab"]')];
-const PARENT = {p6c:"p6", p6j:"p6"};
+const PARENT = {p6c:"p6", p6j:"p6", p2s:"p2"};
 function show(pid){
   document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id===pid));
   tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.p===(PARENT[pid]||pid))));
@@ -557,9 +695,10 @@ DATA.p6j = {period: DATA.p7.period, kpis: DATA.p7.kpis.slice(2), japao: DATA.p7.
 delete DATA.p7;
 
 Object.keys(DATA).forEach(renderPage);
+renderSafras();
 renderHome();
 const start = (location.hash||"#home").slice(1);
-show(start==="home" || DATA[start] ? start : "home");
+show(start==="home" || start==="p2s" || DATA[start] ? start : "home");
 </script>
 </body>
 </html>
